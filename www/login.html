@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexus Login</title>
+
+<link rel="stylesheet" href="login.css">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="loginBox">
+
+    <h1>NEXUS 2.0</h1>
+
+    <p>AI Assistant</p>
+
+    <!-- LOGIN -->
+
+    <div id="loginForm">
+
+        <h2>Login</h2>
+
+        <input
+        id="loginEmail"
+        type="email"
+        placeholder="Gmail">
+
+        <input
+        id="loginPassword"
+        type="password"
+        placeholder="Password">
+
+        <button onclick="login()">
+
+            Login
+
+        </button>
+
+        <p>
+
+            Don't have an account?
+
+            <span onclick="showSignup()">
+
+                Sign Up
+
+            </span>
+
+        </p>
+
+    </div>
+
+    <!-- SIGN UP -->
+
+    <div id="signupForm" style="display:none;">
+
+        <h2>Create Account</h2>
+
+        <input
+        id="signupUsername"
+        type="text"
+        placeholder="Username">
+
+        <input
+        id="signupEmail"
+        type="email"
+        placeholder="Gmail">
+
+        <input
+        id="signupPassword"
+        type="password"
+        placeholder="Password">
+
+        <button onclick="signup()">
+
+            Create Account
+
+        </button>
+
+        <p>
+
+            Already have an account?
+
+            <span onclick="showLogin()">
+
+                Login
+
+            </span>
+
+        </p>
+
+    </div>
+
+</div>
+
+<script src="login.js"></script>
+
+</body>
+
+</html>

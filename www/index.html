@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexus 2.0</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- Sidebar -->
+<!-- ========================= -->
+
+<div class="sidebar">
+
+    <div class="sidebar-header">
+
+        <h1>NEXUS</h1>
+
+        <p>Version 2.0</p>
+
+    </div>
+
+    <button id="homeBtn">
+        🏠 Home
+    </button>
+
+    <button id="chatBtn">
+        💬 Chat
+    </button>
+
+    <button onclick="voice()">
+        🎤 Start voice
+    </button>
+
+    <button onclick="showHistory()">
+    📜 History
+</button>
+
+
+    <button onclick="showSettings()">
+    ⚙ Settings
+</button>
+
+<button onclick="showProfileSettings()">
+    👤 Profile
+</button>
+
+    <button onclick="showAbout()">ℹ️ About</button>
+
+    <button id="authBtn"></button>
+
+    <div class="sidebar-footer">
+
+        <hr>
+
+        <h3 id="usernameDisplay">👤 User</h3>
+
+        <small>Nexus AI</small>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- Main -->
+<!-- ========================= -->
+
+<div class="main">
+
+    <!-- ========================= -->
+    <!-- Top Bar -->
+    <!-- ========================= -->
+
+    <div class="topbar">
+
+        <h2>Nexus AI</h2>
+
+        <div class="status">
+
+            🟢 Ollama Connected
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- HOME PAGE -->
+    <!-- ========================= -->
+
+    <div id="homePage">
+
+
+        <div class="statusCard">
+
+            <h3>🤖 Nexus 2.0</h3>
+
+            <p id="statusText">
+
+                🟢 Ollama Connected
+
+            </p>
+
+        </div>
+
+        <div class="quickActions">
+
+            <button onclick="newChat()" class="homeBtn">
+    💬 New Chat
+</button>
+
+            <button onclick="showHistory()">
+    📜 History
+</button>
+
+            <button onclick="showAbout()">ℹ️ About</button>
+
+            <button>
+                ⚙ Settings
+            </button>
+
+
+        </div>
+
+        <div class="infoCard">
+
+            <h3>System</h3>
+
+            <p>Model : qwen2.5:3b</p>
+
+            <p>Version : 2.0</p>
+
+            <p>Creator : Sai Jagan Reddy</p>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- CHAT PAGE -->
+    <!-- ========================= -->
+
+    <div id="chatPage" style="display:none;">
+
+        <div id="chatBox">
+
+        </div>
+
+        <div class="inputArea">
+
+            <input
+                id="messageInput"
+                type="text"
+                placeholder="Message Nexus..."
+            >
+
+            <button id="sendBtn">
+
+                Send
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="nexusOrbPanel" style="display:none;">
+
+    <div id="nexusOrb">
+        <div class="orb-core"></div>
+    </div>
+
+
+    <button id="stopVoiceBtn" onclick="stopVoice()">
+        ⏹ Stop Voice
+    </button>
+
+
+    <button id="standbyBtn" onclick="toggleStandby()">
+        Stand By: 🟢 ON
+    </button>
+
+</div>
+
+<!-- ========================= -->
+<!-- HISTORY PAGE -->
+<!-- ========================= -->
+
+<div id="historyPage" style="display:none;">
+
+    <button
+        class="aboutCloseBtn"
+        onclick="closeHistory()">
+        ❌
+    </button>
+
+    <h1>History</h1>
+
+    <input
+        id="historySearch"
+        type="text"
+        placeholder="🔍 Search chats..."
+        onkeyup="searchHistory()">
+
+    <br><br>
+
+    <button
+        class="deleteAllBtn"
+        onclick="deleteAllHistory()">
+        🗑 Delete All History
+    </button>
+
+    <br><br>
+
+    <div id="historyList"></div>
+
+</div>
+<!-- ========================= -->
+<!-- ABOUT PAGE -->
+<!-- ========================= -->
+
+<div id="aboutPage" style="display:none;">
+
+    <button class="aboutCloseBtn" onclick="closeAbout()">
+        ❌
+    </button>
+
+    <h1>About Nexus 2.0</h1>
+
+    <p>
+        Nexus 2.0 is a futuristic AI assistant with voice conversations,
+        intelligent responses, and a modern interface.
+    </p>
+
+    <h2>Features</h2>
+
+    <ul>
+        <li>🎤 Voice Assistant</li>
+        <li>💬 AI Chat</li>
+        <li>🤖 Powered by Ollama</li>
+        <li>⚡ Fast Local AI</li>
+    </ul>
+
+    <h2>Creator</h2>
+
+    <p><strong>Sai Jagan Reddy</strong></p>
+
+    <h2>Version</h2>
+
+    <p>Nexus 2.0</p>
+
+</div>
+
+<!-- ========================= -->
+<!-- SETTINGS PAGE -->
+<!-- ========================= -->
+
+<div id="settingsPage" style="display:none;">
+
+    <button
+        class="aboutCloseBtn"
+        onclick="closeSettings()">
+
+        ❌
+
+    </button>
+
+    <h1>⚙ Settings</h1>
+
+    <div class="settingsMenu">
+
+        <button onclick="showProfileSettings()">
+    👤 Profile
+</button>
+
+        <button onclick="showAppearanceSettings()">
+    🎨 Appearance
+</button>
+
+        <button onclick="showLanguageSettings()">
+    🌍 Language
+</button>
+
+        <button onclick="showModelSettings()">
+    🤖 AI Model
+</button>
+
+        <button onclick="showSecuritySettings()">
+    🔐 Security
+</button>
+
+<button onclick="showAIPreferences()">
+    🧠 AI Preferences
+</button>
+
+        <button onclick="showAbout()">
+     ℹ About Nexus
+</button>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- PROFILE SETTINGS -->
+<!-- ========================= -->
+
+<div id="profileSettingsPage" style="display:none;">
+
+    <button
+        class="aboutCloseBtn"
+        onclick="closeProfileSettings()">
+
+        ❌
+
+    </button>
+
+    <h1>👤 Profile</h1>
+
+    <div class="profileCard">
+
+        <h3>Username</h3>
+
+        <input
+        id="profileUsername"
+        type="text">
+
+        <h3>Gmail</h3>
+
+        <input
+        id="profileEmail"
+        type="email"
+        disabled>
+
+        <br><br>
+
+        <button onclick="saveProfile()">
+
+            💾 Save Username
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- APPEARANCE SETTINGS -->
+<!-- ========================= -->
+
+<div id="appearanceSettingsPage" style="display:none;">
+
+    <button
+        class="aboutCloseBtn"
+        onclick="closeAppearanceSettings()">
+
+        ❌
+
+    </button>
+
+    <h1>🎨 Appearance</h1>
+
+    <div class="themeGrid">
+
+        <button onclick="setTheme('dark')">
+            🌙 Dark
+        </button>
+
+        <button onclick="setTheme('blue')">
+            💙 Blue
+        </button>
+
+        <button onclick="setTheme('purple')">
+            💜 Purple
+        </button>
+
+        <button onclick="setTheme('light')">
+            ☀️ Light
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- LANGUAGE SETTINGS -->
+<!-- ========================= -->
+
+<div id="languageSettingsPage" style="display:none;">
+
+    <button
+        class="aboutCloseBtn"
+        onclick="closeLanguageSettings()">
+
+        ❌
+
+    </button>
+
+    <h1>🌍 Language</h1>
+
+    <p>Select your preferred language.</p>
+
+    <select id="languageSelect">
+
+        <option value="en">
+            🇺🇸 English
+        </option>
+
+        <option value="hi">
+            🇮🇳 हिन्दी
+        </option>
+
+        <option value="te">
+            🇮🇳 తెలుగు
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button onclick="saveLanguage()">
+        💾 Save Language
+    </button>
+
+</div>
+
+<!-- ========================= -->
+<!-- AI MODEL SETTINGS -->
+<!-- ========================= -->
+
+<div id="modelSettingsPage" style="display:none;">
+
+    <button
+        class="aboutCloseBtn"
+        onclick="closeModelSettings()">
+
+        ❌
+
+    </button>
+
+    <h1>🤖 AI Model</h1>
+
+    <p>Select the Ollama model Nexus should use.</p>
+
+    <select id="modelSelect">
+
+        <option value="qwen2.5:3b">
+            qwen2.5:3b
+        </option>
+
+        <option value="llama3">
+            llama3
+        </option>
+
+        <option value="gemma3">
+            gemma3
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button onclick="saveModel()">
+
+        💾 Save Model
+
+    </button>
+
+</div>
+
+<!-- ========================= -->
+<!-- SECURITY SETTINGS -->
+<!-- ========================= -->
+
+<div id="securitySettingsPage" style="display:none;">
+
+    <button
+        class="aboutCloseBtn"
+        onclick="closeSecuritySettings()">
+
+        ❌
+
+    </button>
+
+    <h1>🔐 Security</h1>
+
+    <h3>Current Password</h3>
+
+    <input
+    id="currentPassword"
+    type="password"
+    placeholder="Current Password">
+
+    <h3>New Password</h3>
+
+    <input
+    id="newPassword"
+    type="password"
+    placeholder="New Password">
+
+    <br><br>
+
+    <button onclick="changePassword()">
+
+        🔑 Change Password
+
+    </button>
+
+    <br><br>
+
+    <button onclick="logout()">
+
+        🚪 Logout
+
+    </button>
+
+</div>
+
+<!-- ========================= -->
+<!-- AI PREFERENCES -->
+<!-- ========================= -->
+
+<div id="aiPreferencesPage" style="display:none;">
+
+    <button
+        class="aboutCloseBtn"
+        onclick="closeAIPreferences()">
+
+        ❌
+
+    </button>
+
+    <h1>🧠 AI Preferences</h1>
+
+    <label>
+
+        <input
+        type="checkbox"
+        id="shortReplies">
+
+        Short Replies
+
+    </label>
+
+    <br><br>
+
+    <label>
+
+        <input
+        type="checkbox"
+        id="autoSpeak">
+
+        Auto Speak Replies
+
+    </label>
+
+    <br><br>
+
+    <label>
+
+        <input
+        type="checkbox"
+        id="rememberChats">
+
+        Remember Conversations
+
+    </label>
+
+    <br><br>
+
+    <button onclick="saveAIPreferences()">
+
+        💾 Save
+
+    </button>
+
+</div>
+
+<!-- ========================= -->
+<!-- Scripts -->
+<!-- ========================= -->
+
+<script src="app.js"></script>
+<script src="sidebar.js"></script>
+<script src="chat.js"></script>
+<script src="history.js"></script>
+<script src="memory.js"></script>
+<script src="ollama.js"></script>
+<script src="voice.js"></script>
+<script src="server.js"></script>
+
+
+</body>
+
+</html>
