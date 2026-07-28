@@ -601,7 +601,12 @@
 <script src="ollama.js"></script>
 <script src="voice.js"></script>
 <script src="server.js"></script>
-
+    
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+}
+</script>
 
 </body>
 
