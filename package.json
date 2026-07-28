@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "start": "node server.js"
+    "start": "node www/server.js",
+    "sync": "npx cap sync",
+    "android": "npx cap open android"
   },
   "dependencies": {
     "@capacitor/android": "^8.4.2",

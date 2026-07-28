@@ -7,6 +7,10 @@ const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
 
+console.log("__dirname =", __dirname);
+console.log("index.html =", path.join(__dirname, "index.html"));
+console.log("Exists =", fs.existsSync(path.join(__dirname, "index.html")));
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "0.0.0.0";
@@ -15,6 +19,14 @@ console.log("✅ SERVER FILE LOADED");
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static files (HTML, CSS, JS, images)
+app.use(express.static(__dirname));
+
+// Home page
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
 const USERS_FILE = path.join(__dirname, "users.json");
 
