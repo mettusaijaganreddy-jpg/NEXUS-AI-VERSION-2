@@ -81,7 +81,7 @@ async function askOllama(message){
 
         const response = await fetch(
 
-            "http://localhost:11434/api/chat",
+            "https://localhost:11434/api/chat",
 
             {
 
