@@ -241,6 +241,6 @@ app.post("/change-password", async(req,res)=>{
 
 app.listen(PORT, HOST, ()=>{
 
-    console.log(`🚀 Nexus Login Server Running at http://localhost:${PORT}`);
+    console.log(`🚀 Nexus Login Server Running at https://localhost:${PORT}`);
 
 });
